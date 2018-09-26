@@ -20,7 +20,7 @@ Very bare-bones interactive tumblr client for making posts.
 
 # Getting data to fill the config file
 1. [Register a new application with tumblr.](https://www.tumblr.com/oauth/register) The application website can be anything: I just input ```https://metapianycist.tumblr.com``` for it. For the default callback URL, put ```http://127.0.0.1/```. Input the consumer key and consumer secret into the correct places in ```configuration.py```.
-2. Use a tool like the pytumblr [interactive_console.py script](https://github.com/tumblr/pytumblr/blob/master/interactive_console.py) to get your oauth tokens. Place them in the correct places in ```configuration.py```.
+2. Open the [Tumblr API Console](https://api.tumblr.com/console), input your consumer key and consumer secret, and click Authenticate. When it has authenticated you, click "Show keys" in the upper righthand corner. Copy the  keys into the correct places in ```configuration.py```.
 3. Fill in your username in the selected_blog area.
 4. Make sure each token in ```configuration,.py``` is surrounded with double quotes. (I just started learning python a few months ago on my own in my spare time and I haven't figured out how to get around this limitation yet.)
 
