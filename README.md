@@ -9,6 +9,7 @@ Very bare-bones interactive tumblr client for making posts.
 # To be implemented in the future
 * Photo, photoset, video and audio posts
 * A message showing success or failure
+* An error message if you aren't authenticated
 
 # Setting up your environment
 1. Make sure you have python >= 3.6 installed with the ```venv``` module (this is sometimes listed in package managers as ```python3-venv```).
