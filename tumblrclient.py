@@ -1,36 +1,35 @@
 #!/usr/bin/env python3
 
 import pytumblr
-import configuration as config
+from configuration import consumer_key, consumer_secret, oauth_token, oauth_token_secret, selected_blog
 
 client = pytumblr.TumblrRestClient(
-	config.consumer_key,
-	config.consumer_secret,
-	config.oauth_token,
-	config.oauth_token_secret)
+         consumer_key,
+         consumer_secret,
+         oauth_token,
+         oauth_token_secret)
+
 
 def tags():
-	print("Enter tags separated by commas.")
-	input_string = input("> ")
-	tag_list = input_string.split(",")
-	return tag_list
+    print("Enter tags separated by commas.")
+    input_string = input("> ")
+    tag_list = input_string.split(",")
+    return tag_list
 
-def state():
-	print("Published, draft, queue, or private?")
-	selected_state = input("> ")
-	return selected_state
 
 def postbody():
-	print("Enter paragraphs one at a time, pressing enter after each. When finished, leave blank and press enter.")
-	paragraphs = []
-	while True:
-		paragraph = input("new paragraph > ")
-		if paragraph:
-			paragraphs.append("<p>" + paragraph + "</p>")
-		else:
-			break
-	postbody = "\n\n".join(paragraphs)
-	return postbody
+    print('''Enter paragraphs one at a time, pressing enter after each.
+    When finished, leave blank and press enter.''')
+    paragraphs = []
+    while True:
+        paragraph = input("new paragraph > ")
+        if paragraph:
+            paragraphs.append("<p>" + paragraph + "</p>")
+        else:
+            break
+    postbody = "\n".join(paragraphs)
+    return postbody
+
 
 print('''What type of post would you like to make?
 
@@ -38,29 +37,33 @@ Allowed options: text, chat, quote, link, photo, audio, video''')
 posttype = input("> ")
 
 if posttype == "text":
-    client.create_text(blogname=config.selected_blog,
-        state=state(),
+    client.create_text(
+        blogname=selected_blog,
+        state=input("published, draft, queue or private? > "),
         title=input("title > "),
         body=postbody(),
         tags=tags()
     )
 elif posttype == "quote":
-    client.create_quote(blogname=config.selected_blog,
-        state=state(),
+    client.create_quote(
+        blogname=selected_blog,
+        state=input("published, draft, queue or private? > "),
         quote=input("the quote > "),
         source=input("who said it? > "),
         tags=tags()
     )
 elif posttype == "link":
-    client.create_link(blogname=config.selected_blog,
-        state=state(),
+    client.create_link(
+        blogname=selected_blog,
+        state=input("published, draft, queue or private? > "),
         title=input("title > "),
         url=input("URL of link > "),
         description=postbody(),
         tags=tags()
     )
 elif posttype == "chat":
-    print("Enter chat lines one at a time, pressing enter after each. When finished, leave blank and press enter.")
+    print('''Enter chat lines one at a time, pressing enter after each.
+    When finished, leave blank and press enter.''')
     lines = []
     while True:
         line = input("line of chat > ")
@@ -69,8 +72,9 @@ elif posttype == "chat":
         else:
             break
     chat = '\n'.join(lines)
-    client.create_chat(blogname=config.selected_blog,
-        state=state(),
+    client.create_chat(
+        blogname=selected_blog,
+        state=input("published, draft, queue or private? > "),
         title=input("title > "),
         conversation=chat,
         tags=tags()
